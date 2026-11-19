@@ -244,6 +244,30 @@
       ]
     },
     {
+      "name": "extension/openclawcash",
+      "type": "registry:item",
+      "title": "OpenClawCash",
+      "description": "Give an eve agent crypto wallets and escrow payments, with approval on every money-moving call.",
+      "dependencies": [
+        "@openclawcash/eve"
+      ],
+      "envVars": {
+        "OPENCLAWCASH_AGENT_KEY": ""
+      },
+      "meta": {
+        "eve": {
+          "requires": ">=1.0.0"
+        }
+      },
+      "files": [
+        {
+          "path": "registry/extensions/openclawcash.ts",
+          "type": "registry:file",
+          "target": "agent/extensions/openclawcash.ts"
+        }
+      ]
+    },
+    {
       "name": "extension/nimble",
       "type": "registry:item",
       "title": "Nimble",

@@ -290,6 +290,13 @@ export const INTEGRATIONS: readonly IntegrationEntry[] = [
     surfaces: { scaffoldable: false, registry: true, gallery: true },
   },
   {
+    slug: "openclawcash",
+    name: "OpenClawCash",
+    kind: "extension",
+    tagline: "Give your eve agent crypto wallets and escrow payments to other agents.",
+    surfaces: { scaffoldable: false, registry: true, gallery: true },
+  },
+  {
     slug: "nimble",
     name: "Nimble",
     kind: "extension",

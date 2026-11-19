@@ -451,6 +451,9 @@ importers:
       '@onkernel/eve-extension':
         specifier: ^0.1.4
         version: 0.1.4(@ai-sdk/mcp@2.0.99(zod@4.6.7))(@auth/core@0.41.3)(@chat-adapter/slack@4.44.0(ai@7.0.172(zod@4.6.7))(bufferutil@4.1.0)(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)(zod@4.6.7))(ai@7.0.172(zod@4.6.7))(better-auth@1.7.19(c6ed61ca3eb42548ab2f364a96ff6a94))(eve@packages+eve)
+      '@openclawcash/eve':
+        specifier: 0.1.0
+        version: 0.1.0(eve@packages+eve)
       '@opentelemetry/api':
         specifier: 1.9.1
         version: 1.9.1
@@ -4465,6 +4468,12 @@ packages:
   '@oozcitak/util@10.0.0':
     resolution: {integrity: sha512-hAX0pT/73190NLqBPPWSdBVGtbY6VOhWYK3qqHqtXQ1gK7kS2yz4+ivsN07hpJ6I3aeMtKP6J6npsEKOAzuTLA==}
     engines: {node: '>=20.0'}
+
+  '@openclawcash/eve@0.1.0':
+    resolution: {integrity: sha512-pLWgNTH5NBaYcC+bFlL8b5l4vQuV/vNYPE3ul/qMhPC8o84Udm6Okre1e2feiF2ZYXnc64VmhtjKFZyNjtKMfA==}
+    engines: {node: '>=24'}
+    peerDependencies:
+      eve: '*'
 
   '@opentelemetry/api-logs@0.218.0':
     resolution: {integrity: sha512-fmEWp5kXlGEc3i/lR698Hz41DfGyN4Tbe4g7L1AxSc7fF8Xeh/FQ9Quqpa9dVA413Q1Ad43QOLzU4JoXgbFPWw==}
@@ -18011,6 +18020,11 @@ snapshots:
       '@oozcitak/util': 10.0.0
 
   '@oozcitak/util@10.0.0': {}
+
+  '@openclawcash/eve@0.1.0(eve@packages+eve)':
+    dependencies:
+      eve: link:packages/eve
+      zod: 4.6.7
 
   '@opentelemetry/api-logs@0.218.0':
     dependencies:

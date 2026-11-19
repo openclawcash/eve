@@ -251,6 +251,21 @@ describe("Nimble extension setup", () => {
   });
 });
 
+describe("OpenClawCash extension setup", () => {
+  it("documents the agent-key mount, approvals, and the testnet default", () => {
+    const integration = getIntegration("openclawcash")!;
+
+    expect(integration.type).toBe("extension");
+    expect(integration.install).toContain("eve add extension/openclawcash");
+    expect(integration.quickStart).toContain("OPENCLAWCASH_AGENT_KEY");
+    expect(integration.quickStart).toContain('import openclawcash from "@openclawcash/eve"');
+    expect(integration.quickStart).toContain("agent/extensions/openclawcash.ts");
+    expect(integration.configure).toContain("allowMainnet: true");
+    expect(integration.configure).toContain("mainnet_not_allowed");
+    expect(integration.configure).toContain("require eve approval on every call");
+  });
+});
+
 describe("Sanity Context extension setup", () => {
   it("documents the organization-token mount and links the Sanity connection", () => {
     const integration = getIntegration("sanity-context")!;

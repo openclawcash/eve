@@ -634,6 +634,21 @@ export const linkLogo = (props: LogoProps) => (
   </svg>
 );
 
+const openclawcashLogo = (props: LogoProps) => (
+  <svg
+    aria-label="OpenClawCash"
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <image
+      height="100"
+      href="data:image/png;base64,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"
+      width="100"
+    />
+  </svg>
+);
+
 const supabaseLogo = (props: LogoProps) => <SiSupabase color="default" {...props} />;
 
 const ticktickLogo = (props: LogoProps) => <SiTicktick color="default" {...props} />;
@@ -1246,6 +1261,7 @@ export const logos = {
   similarweb: similarwebLogo,
   stripe: stripeLogo,
   link: linkLogo,
+  openclawcash: openclawcashLogo,
   supabase: supabaseLogo,
   tavily: tavilyLogo,
   "ticket-tailor": ticketTailorLogo,

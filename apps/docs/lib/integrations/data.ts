@@ -2347,6 +2347,61 @@ Creating a spend request requires eve approval on every call by default. This is
 
 Payment credentials requested with \`include: ["card"]\` are returned as tool output and may appear in stored session events. Financial-data and insight results can also contain private information. The skills tell the agent not to repeat credentials and to summarize financial data. Applications remain responsible for transcript access and retention. Keep tokens out of prompts and source control. See the [extension documentation](https://github.com/stripe/link-cli/tree/main/packages/integrations/eve) for the full tool contract and security guidance.`,
   },
+  openclawcash: {
+    logo: "openclawcash",
+    docsHref: "https://github.com/openclawcash/openclawcash-eve#readme",
+    keywords: [
+      "openclawcash",
+      "wallet",
+      "crypto",
+      "payments",
+      "escrow",
+      "usdc",
+      "agent-to-agent",
+      "approval",
+    ],
+    install: `Install the OpenClawCash extension for eve:
+
+\`\`\`bash
+eve add extension/openclawcash
+\`\`\`
+
+The extension requires Node.js 24 or later and eve 1.0.0 or later. The agent gets an OpenClawCash API key, never a private key: OpenClawCash holds the wallets and checks the account's spending limits and allowlists before it signs anything.`,
+    quickStart: `Create an agent API key at [openclawcash.com](https://openclawcash.com) under Dashboard > API keys, then add it to the agent's server environment:
+
+\`\`\`bash title=".env.local"
+OPENCLAWCASH_AGENT_KEY=your_agent_key
+\`\`\`
+
+The registry mounts the extension under \`agent/extensions/openclawcash.ts\`:
+
+\`\`\`ts title="agent/extensions/openclawcash.ts"
+import openclawcash from "@openclawcash/eve";
+
+export default openclawcash({
+  apiKey: process.env.OPENCLAWCASH_AGENT_KEY!,
+});
+\`\`\`
+
+The filename supplies the \`openclawcash\` namespace, so tools are named \`openclawcash__wallets_list\`, \`openclawcash__transfer\`, and so on. The extension contributes tools for wallets, balances, transactions, policies, transfers, swaps, and escrow, plus a \`pay-for-work\` skill for buyers and a \`get-paid\` skill for sellers.`,
+    configure: `### Approval and networks
+
+Reads run without approval. \`transfer\`, \`swap\`, \`escrow_fund\`, \`escrow_release\`, \`escrow_refund\`, and \`dispute_open\` require eve approval on every call, and \`payreq_create\` and \`evidence_submit\` require it once per session. The approval prompt names the amount, token, wallet, and recipient. Override any tool's approval from the agent as described in the [extension docs](/docs/extensions).
+
+The mount is testnet-only by default: money-moving tools refuse any network other than \`sepolia\`, \`solana-devnet\`, or \`solana-testnet\` with \`mainnet_not_allowed\`. Set \`allowMainnet: true\` to move real funds. Spending limits, allowlists, and the account's live-transaction setting are enforced by OpenClawCash and apply on top.
+
+### Escrow between agents
+
+A seller agent creates a pay request with declared deliverables and a deadline. The buyer agent funds the escrow, the seller submits evidence for each deliverable, and the buyer releases the payment. A missed deadline refunds the buyer. Pair the extension with the [A2A channel](/docs/channels/a2a) so two eve agents can hire and pay each other.
+
+### Per-user accounts
+
+For an application where each end user has their own OpenClawCash account, pass an authorization provider with \`principalType: "user"\` and a \`getToken\` that returns that user's key, instead of \`apiKey\`. A \`401\` asks the caller to re-authorize. Configure exactly one of \`apiKey\` or \`auth\`.
+
+### Key handling
+
+The key is sent only to \`https://openclawcash.com\` or an \`https://*.openclawcash.com\` host set with \`baseUrl\`, redirects are not followed, and the key never enters the model context. Writes send an \`Idempotency-Key\` derived from the tool call's \`callId\`, so a replayed call is deduplicated instead of paying twice. Keep the key server-side, out of prompts and source control. See the [extension README](https://github.com/openclawcash/openclawcash-eve#readme) for the full tool list.`,
+  },
 };
 
 /**
